@@ -20,7 +20,6 @@
         android:contentDescription="@string/content_desc_splash_icon"/>
 
     <TextView
-        android:id="@+id/tv_made_by_statement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/made_by_statement"

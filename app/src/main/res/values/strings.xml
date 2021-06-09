@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="movie_detail">Movie Detail</string>
+
+
+    <string name="empty_data_statement">Empty Data</string>
+    <string name="error_statement">Sorry, something went wrong</string>
+    <string name="fab_favorite_button">favorite_action_button</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="content_desc_splash_icon">Splash Screen Image</string>
+    <string name="made_by_statement">Movies by Verindra Rizya</string>
+</resources>

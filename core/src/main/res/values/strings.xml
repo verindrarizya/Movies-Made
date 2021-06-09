@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poster">Poster</string>
+
+    <string name="placeholder_title">Title Placeholder</string>
+    <string name="placeholder_rating">9.99</string>
+    <string name="placeholder_date">22-07-1999</string>
+    <string name="placeholder_overview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum rhoncus diam, vitae cursus neque auctor nec. Pellentesque lobortis scelerisque libero posuere malesuada. Fusce posuere ligula dui, quis cursus mi blandit et. Donec vehicula, neque a lobortis ullamcorper, nibh felis faucibus velit, vel tincidunt quam sapien vitae nunc. Nam vel ex finibus, ultricies eros ac, iaculis felis. Suspendisse porta quam eu libero luctus efficitur. Duis vulputate, risus ac tempor porttitor, urna velit tristique metus, sit amet aliquam diam quam sed leo. Nulla facilisi.</string>
+
+    <string name="label_release_date">Release Date:</string>
+    <string name="label_rating">Rating:</string>
+    <string name="label_overview">Overview</string>
+</resources>

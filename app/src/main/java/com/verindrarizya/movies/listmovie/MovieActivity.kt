@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.verindrarizya.core.data.Resource
@@ -12,22 +13,29 @@ import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.ui.MovieAdapter
 import com.verindrarizya.core.utils.setGone
 import com.verindrarizya.core.utils.setVisible
+import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
+import com.verindrarizya.movies.ViewModelFactory
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
 import com.verindrarizya.movies.detailmovie.MovieDetailActivity
 import com.verindrarizya.movies.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE
-import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class MovieActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityMovieBinding
-    private val movieViewModel: MovieViewModel by viewModel()
-    private val dividerItemDecoration: DividerItemDecoration by inject()
-    private val linearLayoutManager: LinearLayoutManager by inject()
+
+    @Inject lateinit var viewModelFactory: ViewModelFactory
+    private val movieViewModel: MovieViewModel by viewModels { viewModelFactory }
+
+    private val dividerItemDecoration: DividerItemDecoration by lazy {
+        DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+    }
+    private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -49,7 +57,7 @@ class MovieActivity : AppCompatActivity() {
     }
 
     private fun moveToFavoriteActivity() {
-        val intent = Intent(this, Class.forName("com.verindrarizya.favorite.MovieFavoriteActivity"))
+        val intent = Intent(this, Class.forName("com.verindrarizya.favorite.ui.MovieFavoriteActivity"))
         startActivity(intent)
     }
 

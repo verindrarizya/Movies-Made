@@ -3,16 +3,19 @@ package com.verindrarizya.movies.detailmovie
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.verindrarizya.core.data.source.remote.network.ApiAssets.BASE_IMAGE_URL
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.utils.setGone
 import com.verindrarizya.core.utils.setVisible
+import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
+import com.verindrarizya.movies.ViewModelFactory
 import com.verindrarizya.movies.databinding.ActivityMovieDetailBinding
 import com.verindrarizya.movies.databinding.ContentMovieDetailBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -22,9 +25,12 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
     private lateinit var contentMovieDetailBinding: ContentMovieDetailBinding
-    private val movieDetailViewModel: MovieDetailViewModel by viewModel()
+
+    @Inject lateinit var viewModelFactory: ViewModelFactory
+    private val movieDetailViewModel: MovieDetailViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         contentMovieDetailBinding = binding.contentMovieDetail

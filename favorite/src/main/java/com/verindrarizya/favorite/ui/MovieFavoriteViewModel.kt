@@ -1,4 +1,4 @@
-package com.verindrarizya.favorite
+package com.verindrarizya.favorite.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

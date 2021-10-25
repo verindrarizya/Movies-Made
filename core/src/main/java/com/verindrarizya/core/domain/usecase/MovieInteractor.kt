@@ -4,8 +4,9 @@ import com.verindrarizya.core.data.Resource
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.domain.repository.IMovieRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MovieInteractor(private val movieRepository: IMovieRepository): MovieUseCase {
+class MovieInteractor @Inject constructor(private val movieRepository: IMovieRepository): MovieUseCase {
 
     override fun getMovies(): Flow<Resource<List<Movie>>> = movieRepository.getMovies()
 

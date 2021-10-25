@@ -13,7 +13,7 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE is_favorite = 1")
     fun getFavoriteMovies(): Flow<List<MovieEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insertMovie(movies: List<MovieEntity>)
 
     @Update

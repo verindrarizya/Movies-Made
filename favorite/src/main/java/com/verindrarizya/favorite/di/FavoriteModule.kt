@@ -1,9 +1,14 @@
 package com.verindrarizya.favorite.di
 
-import com.verindrarizya.favorite.MovieFavoriteViewModel
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import com.verindrarizya.core.domain.usecase.MovieInteractor
+import com.verindrarizya.core.domain.usecase.MovieUseCase
+import dagger.Binds
+import dagger.Module
 
-val favoriteModule = module {
-    viewModel { MovieFavoriteViewModel(get()) }
+@Module
+abstract class FavoriteModule {
+
+    @Binds
+    abstract fun bindMovieUseCase(movieInteractor: MovieInteractor): MovieUseCase
+
 }

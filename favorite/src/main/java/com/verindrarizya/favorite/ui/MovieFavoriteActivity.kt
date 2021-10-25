@@ -1,35 +1,41 @@
-package com.verindrarizya.favorite
+package com.verindrarizya.favorite.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.ui.MovieAdapter
 import com.verindrarizya.core.utils.setGone
 import com.verindrarizya.core.utils.setVisible
-import com.verindrarizya.favorite.di.favoriteModule
+import com.verindrarizya.favorite.ViewModelFactory
+import com.verindrarizya.favorite.di.DaggerFavoriteComponent
+import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
 import com.verindrarizya.movies.detailmovie.MovieDetailActivity
-import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.context.loadKoinModules
+import javax.inject.Inject
 
 class MovieFavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieBinding
-    private val movieFavoriteViewModel: MovieFavoriteViewModel by viewModel()
-    private val dividerItemDecoration: DividerItemDecoration by inject()
-    private val linearLayoutManager: LinearLayoutManager by inject()
+
+    @Inject lateinit var viewModelFactory: ViewModelFactory
+    private val movieFavoriteViewModel: MovieFavoriteViewModel by viewModels { viewModelFactory }
+    private val dividerItemDecoration: DividerItemDecoration by lazy {
+        DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+    }
+    private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val coreComponent = (application as MyApplication).coreComponent
+        val favoriteComponent = DaggerFavoriteComponent.factory().create(coreComponent)
+        favoriteComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        loadKoinModules(favoriteModule)
 
         initActionBar()
 

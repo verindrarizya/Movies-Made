@@ -1,8 +1,8 @@
 package com.verindrarizya.movies.di
 
 import com.verindrarizya.core.di.CoreComponent
-import com.verindrarizya.movies.detailmovie.MovieDetailActivity
-import com.verindrarizya.movies.listmovie.MovieActivity
+import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
+import com.verindrarizya.movies.ui.listmovie.MovieActivity
 import dagger.Component
 
 @AppScope

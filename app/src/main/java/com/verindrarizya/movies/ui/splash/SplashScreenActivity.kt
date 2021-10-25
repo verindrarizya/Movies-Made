@@ -1,12 +1,11 @@
-package com.verindrarizya.movies.splash
+package com.verindrarizya.movies.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.verindrarizya.movies.R
 import com.verindrarizya.movies.databinding.ActivitySplashScreenBinding
-import com.verindrarizya.movies.listmovie.MovieActivity
+import com.verindrarizya.movies.ui.listmovie.MovieActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

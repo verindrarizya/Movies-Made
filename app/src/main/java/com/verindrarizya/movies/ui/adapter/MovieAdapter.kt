@@ -1,20 +1,20 @@
-package com.verindrarizya.core.ui
+package com.verindrarizya.movies.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.verindrarizya.core.data.source.remote.network.ApiAssets.BASE_IMAGE_URL
-import com.verindrarizya.core.databinding.ItemMovieRowBinding
+import com.verindrarizya.core.data.source.remote.network.ApiAssets
 import com.verindrarizya.core.domain.model.Movie
+import com.verindrarizya.movies.databinding.ItemMovieBinding
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private val listMovie = ArrayList<Movie>()
     var onItemClick: ((Movie) -> Unit)? = null
 
-    inner class MovieViewHolder(private val binding: ItemMovieRowBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class MovieViewHolder(private val binding: ItemMovieBinding): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
                 onItemClick?.invoke(listMovie[adapterPosition])
@@ -24,7 +24,7 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         fun bind(data: Movie) {
             with(binding) {
                 Glide.with(itemView.context)
-                    .load("$BASE_IMAGE_URL${data.poster}")
+                    .load("${ApiAssets.BASE_IMAGE_URL}${data.poster}")
                     .apply(RequestOptions().override(100, 150))
                     .into(imgPoster)
 
@@ -43,8 +43,9 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val itemMovieRowBinding = ItemMovieRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MovieViewHolder(itemMovieRowBinding)
+        val itemMovieBinding =
+            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(itemMovieBinding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

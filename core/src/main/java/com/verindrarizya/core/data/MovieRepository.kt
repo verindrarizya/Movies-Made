@@ -8,7 +8,9 @@ import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.domain.repository.IMovieRepository
 import com.verindrarizya.core.utils.AppExecutors
 import com.verindrarizya.core.utils.DataMapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -36,7 +38,7 @@ class MovieRepository @Inject constructor(
                 val movieList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertMovie(movieList)
             }
-        }.asFlow()
+        }.asFlow().flowOn(Dispatchers.Main)
     }
 
     override fun getFavoriteMovies(): Flow<List<Movie>> =

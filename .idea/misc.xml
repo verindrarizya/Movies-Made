@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/drawable/ic_calendar_black_18.xml" value="0.1125" />
         <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/activity_movie.xml" value="0.15462962962962962" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/item_movie.xml" value="0.20416666666666666" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/item_movie_row.xml" value="0.20416666666666666" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/item_row_movie.xml" value="0.20416666666666666" />
+        <entry key="..\:/V/Android/madeee/Movies/core/src/main/res/layout/item_movie_row.xml" value="0.67" />
       </map>
     </option>
   </component>

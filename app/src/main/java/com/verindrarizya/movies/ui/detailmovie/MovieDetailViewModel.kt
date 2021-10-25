@@ -1,4 +1,4 @@
-package com.verindrarizya.movies.detailmovie
+package com.verindrarizya.movies.ui.detailmovie
 
 import androidx.lifecycle.ViewModel
 import com.verindrarizya.core.domain.model.Movie

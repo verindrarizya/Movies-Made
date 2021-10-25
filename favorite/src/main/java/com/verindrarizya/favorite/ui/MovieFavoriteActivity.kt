@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.verindrarizya.core.domain.model.Movie
-import com.verindrarizya.core.ui.MovieAdapter
+import com.verindrarizya.movies.ui.adapter.MovieAdapter
 import com.verindrarizya.core.utils.setGone
 import com.verindrarizya.core.utils.setVisible
 import com.verindrarizya.favorite.ViewModelFactory
@@ -15,7 +15,7 @@ import com.verindrarizya.favorite.di.DaggerFavoriteComponent
 import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
-import com.verindrarizya.movies.detailmovie.MovieDetailActivity
+import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
 import javax.inject.Inject
 
 class MovieFavoriteActivity : AppCompatActivity() {
@@ -24,9 +24,7 @@ class MovieFavoriteActivity : AppCompatActivity() {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
     private val movieFavoriteViewModel: MovieFavoriteViewModel by viewModels { viewModelFactory }
-    private val dividerItemDecoration: DividerItemDecoration by lazy {
-        DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-    }
+
     private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +72,6 @@ class MovieFavoriteActivity : AppCompatActivity() {
         with(binding.rvMovies) {
             layoutManager = linearLayoutManager
             setHasFixedSize(true)
-            addItemDecoration(dividerItemDecoration)
             adapter = movieAdapter
         }
     }

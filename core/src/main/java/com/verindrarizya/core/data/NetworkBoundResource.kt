@@ -3,7 +3,7 @@ package com.verindrarizya.core.data
 import com.verindrarizya.core.data.source.remote.network.ApiResponse
 import kotlinx.coroutines.flow.*
 
-abstract class NetworkBoundResource<ResultType, RequestType>() {
+abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private val result: Flow<Resource<ResultType>> = flow {
         emit(Resource.Loading())

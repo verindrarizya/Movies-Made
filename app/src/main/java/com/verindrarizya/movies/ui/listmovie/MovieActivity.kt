@@ -1,24 +1,22 @@
-package com.verindrarizya.movies.listmovie
+package com.verindrarizya.movies.ui.listmovie
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.verindrarizya.core.data.Resource
 import com.verindrarizya.core.domain.model.Movie
-import com.verindrarizya.core.ui.MovieAdapter
 import com.verindrarizya.core.utils.setGone
 import com.verindrarizya.core.utils.setVisible
 import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
 import com.verindrarizya.movies.ViewModelFactory
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
-import com.verindrarizya.movies.detailmovie.MovieDetailActivity
-import com.verindrarizya.movies.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE
+import com.verindrarizya.movies.ui.adapter.MovieAdapter
+import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
+import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE
 import javax.inject.Inject
 
 class MovieActivity : AppCompatActivity() {
@@ -29,9 +27,6 @@ class MovieActivity : AppCompatActivity() {
     @Inject lateinit var viewModelFactory: ViewModelFactory
     private val movieViewModel: MovieViewModel by viewModels { viewModelFactory }
 
-    private val dividerItemDecoration: DividerItemDecoration by lazy {
-        DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-    }
     private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +37,15 @@ class MovieActivity : AppCompatActivity() {
 
         initActionBar()
         initMoviesObserver()
+        initLoadingObserver()
+        initErrorObserver()
+    }
+
+    /**
+     * Start of functions for appbar
+     */
+    private fun initActionBar() {
+        supportActionBar?.title = getString(R.string.app_name)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,32 +60,16 @@ class MovieActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun moveToFavoriteActivity() {
-        val intent = Intent(this, Class.forName("com.verindrarizya.favorite.ui.MovieFavoriteActivity"))
-        startActivity(intent)
-    }
-
-    private fun initActionBar() {
-        supportActionBar?.title = getString(R.string.app_name)
-    }
+    /**
+     * End of functions for app bar
+     */
 
     private fun initMoviesObserver() {
         movieViewModel.movies.observe(this) { movies ->
-            if (movies != null) {
-                when (movies) {
-                    is Resource.Loading -> binding.progressBar.setVisible()
-
-                    is Resource.Succcess -> {
-                        binding.progressBar.setGone()
-                        movies.data?.let { initAdapter(it) }
-                    }
-
-                    is Resource.Error -> {
-                        binding.progressBar.setGone()
-                        binding.tvEmptyData.setVisible()
-                        binding.tvEmptyData.text = getString(R.string.error_statement)
-                    }
-                }
+            if(movies != null) {
+                initAdapter(movies)
+            } else {
+                binding.tvEmptyData.setVisible()
             }
         }
     }
@@ -99,8 +87,32 @@ class MovieActivity : AppCompatActivity() {
         with(binding.rvMovies) {
             layoutManager = linearLayoutManager
             setHasFixedSize(true)
-            addItemDecoration(dividerItemDecoration)
             adapter = movieAdapter
         }
+    }
+
+    private fun initLoadingObserver() {
+        movieViewModel.isLoading.observe(this) {
+            if (it) {
+                binding.progressBar.setVisible()
+            } else {
+                binding.progressBar.setGone()
+            }
+        }
+    }
+
+    private fun initErrorObserver() {
+        movieViewModel.isError.observe(this) {
+            if (it) {
+                binding.tvEmptyData.setVisible()
+            } else {
+                binding.tvEmptyData.setGone()
+            }
+        }
+    }
+
+    private fun moveToFavoriteActivity() {
+        val intent = Intent(this, Class.forName("com.verindrarizya.favorite.ui.MovieFavoriteActivity"))
+        startActivity(intent)
     }
 }

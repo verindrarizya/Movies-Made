@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Movies">
-        <activity android:name=".splash.SplashScreenActivity">
+        <activity android:name="com.verindrarizya.movies.ui.splash.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +20,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".detailmovie.MovieDetailActivity"
+            android:name="com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity"
             android:theme="@style/Theme.Movies.NoActionBar" />
-        <activity android:name=".listmovie.MovieActivity"/>
+        <activity android:name="com.verindrarizya.movies.ui.listmovie.MovieActivity"/>
     </application>
 
 </manifest>

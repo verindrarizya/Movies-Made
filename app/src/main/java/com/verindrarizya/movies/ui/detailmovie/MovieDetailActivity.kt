@@ -1,4 +1,4 @@
-package com.verindrarizya.movies.detailmovie
+package com.verindrarizya.movies.ui.detailmovie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -39,5 +39,5 @@ A simple application applying clean architecture and modularization for fetching
 - [Glide](https://bumptech.github.io/glide/), a fast and efficient image loading library for Android.
 - Database encryption with [SQLCipher](https://github.com/sqlcipher/android-database-sqlcipher)
 - Obfuscation
-- Memory leak detection with [LeakCanary](https://square.github.io/leakcanary/)
+- Memory leak detection with [LeakCanary](https://square.github.io/leakcanary/)([See this branch](https://github.com/verindrarizya/Movies-Made/tree/with-leakcanary))
 - Certificate Pinning

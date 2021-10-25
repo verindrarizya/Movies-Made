@@ -12,6 +12,7 @@ A simple application applying clean architecture and modularization for fetching
 <div align="center">
     <img src="assets/clean-architecture.png"/>
 </div>
+
 - Presentation Layer, contains UI that are coordinated by ViewModels which execute the use cases.
 - Domain Layer, completely pure kotlin module containing entities, use cases, & repository interfaces.
 - Data Layer, contains repository implementation with multiple data sources. Repository responsible to coordinate data from different data sources.

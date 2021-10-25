@@ -17,6 +17,7 @@ import com.verindrarizya.movies.databinding.ActivityMovieBinding
 import com.verindrarizya.movies.ui.adapter.MovieAdapter
 import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
 import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE
+import com.verindrarizya.movies.ui.setting.SettingActivity
 import javax.inject.Inject
 
 class MovieActivity : AppCompatActivity() {
@@ -49,13 +50,14 @@ class MovieActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_favorite, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_favorite) {
-           moveToFavoriteActivity()
+        when(item.itemId) {
+            R.id.action_favorite -> moveToFavoriteActivity()
+            R.id.action_settings -> moveToSettingActivity()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -113,6 +115,11 @@ class MovieActivity : AppCompatActivity() {
 
     private fun moveToFavoriteActivity() {
         val intent = Intent(this, Class.forName("com.verindrarizya.favorite.ui.MovieFavoriteActivity"))
+        startActivity(intent)
+    }
+
+    private fun moveToSettingActivity() {
+        val intent = Intent(this, SettingActivity::class.java)
         startActivity(intent)
     }
 }

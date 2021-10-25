@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="favorite">Favorite</string>
+    <string name="settings">Settings</string>
     <string name="favorite_movies">Favorite Movies</string>
     <string name="movie_detail">Movie Detail</string>
 
+    <string name="notification_content_title">Check the movies!</string>
+    <string name="notification_content_text">Hi! let\'s check new movies out there</string>
 
     <string name="empty_data_statement">Empty Data</string>
     <string name="error_statement">Sorry, something went wrong</string>
@@ -11,4 +14,7 @@
     <string name="title_favorite">Favorite</string>
     <string name="content_desc_splash_icon">Splash Screen Image</string>
     <string name="made_by_statement">Movies by Verindra Rizya</string>
+    <string name="key_notification_preference">notification_preference</string>
+    <string name="notification_title">Notification</string>
+    <string name="notification_summary">Allow notification each 2 days</string>
 </resources>

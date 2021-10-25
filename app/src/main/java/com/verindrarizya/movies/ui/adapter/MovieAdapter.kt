@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.verindrarizya.core.data.source.remote.network.ApiAssets
 import com.verindrarizya.core.domain.model.Movie
+import com.verindrarizya.movies.R
 import com.verindrarizya.movies.databinding.ItemMovieBinding
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -25,7 +27,8 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             with(binding) {
                 Glide.with(itemView.context)
                     .load("${ApiAssets.BASE_IMAGE_URL}${data.poster}")
-                    .apply(RequestOptions().override(100, 150))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .error(R.drawable.ic_connection_off_24)
                     .into(imgPoster)
 
                 tvTitle.text = data.title

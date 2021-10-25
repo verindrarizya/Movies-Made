@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/drawable/ic__settings_white_24.xml" value="0.2169230769230769" />
         <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/drawable/ic_calendar_black_18.xml" value="0.1125" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/drawable/ic_connection_off_24.xml" value="0.2169230769230769" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/drawable/ic_notifications_black_24.xml" value="0.2169230769230769" />
         <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/activity_movie.xml" value="0.15462962962962962" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/activity_movie_detail.xml" value="0.1835032437442076" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/activity_setting.xml" value="0.1" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/content_movie_detail.xml" value="0.18333333333333332" />
         <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/item_movie.xml" value="0.20416666666666666" />
         <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/item_movie_row.xml" value="0.20416666666666666" />
         <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/layout/item_row_movie.xml" value="0.20416666666666666" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/menu/menu_favorite.xml" value="0.20416666666666666" />
+        <entry key="..\:/V/Android/madeee/Movies/app/src/main/res/xml/preference_main.xml" value="0.20416666666666666" />
         <entry key="..\:/V/Android/madeee/Movies/core/src/main/res/layout/item_movie_row.xml" value="0.67" />
       </map>
     </option>

@@ -6,7 +6,14 @@
 Get your own API KEY from [TMDB](https://www.themoviedb.org/), and put it in buildConfigField inside build.gradle in core module
 
 ## About
-A simple application applying clean architecture and modularization for fetching and showing Movies from [TMDB](https://www.themoviedb.org/). 
+A simple application applying clean architecture and modularization for fetching and showing Movies from [TMDB](https://www.themoviedb.org/).
+
+## Features
+- Fetch and show movies
+- Favorite Movies
+- Add Favorite Movie
+- Delete Favorite Movie
+- Setting, Reminder every 2 days
 
 ## Clean Architecture
 <div align="center">
@@ -24,6 +31,7 @@ A simple application applying clean architecture and modularization for fetching
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata), an observable data holder.
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), class for storing and manage UI-related data in a lifecycle conscious way.
 - [Room](https://developer.android.com/training/data-storage/room), a persistence library that provides an abstraction layer over SQLite.
+- [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager), an API that make it easy to schedule reliable, asynchronous tasks that are expected to run.
 - [Dagger2](https://dagger.dev/dev-guide/), a compile-time dependency injection that is fully static for Java and Android
 - [Retrofit](https://square.github.io/retrofit/), a type-safe HTTP client for Android and Java
 - [OkHttp](https://square.github.io/okhttp/), an HTTP & HTTP/2 client for Android and Java applications
@@ -31,4 +39,5 @@ A simple application applying clean architecture and modularization for fetching
 - [Glide](https://bumptech.github.io/glide/), a fast and efficient image loading library for Android.
 - Database encryption with [SQLCipher](https://github.com/sqlcipher/android-database-sqlcipher)
 - Obfuscation
+- Memory leak detection with [LeakCanary](https://square.github.io/leakcanary/)
 - Certificate Pinning

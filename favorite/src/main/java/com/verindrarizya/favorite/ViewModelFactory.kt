@@ -9,8 +9,8 @@ import javax.inject.Inject
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory @Inject constructor(private val movieUseCase: MovieUseCase): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MovieFavoriteViewModel::class.java)) {
-            return MovieFavoriteViewModel(movieUseCase) as T
+        return if (modelClass.isAssignableFrom(MovieFavoriteViewModel::class.java)) {
+            MovieFavoriteViewModel(movieUseCase) as T
         } else {
             throw IllegalArgumentException("ViewModel Class Not Founf")
         }

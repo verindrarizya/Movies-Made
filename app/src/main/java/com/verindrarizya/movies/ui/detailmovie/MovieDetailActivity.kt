@@ -1,11 +1,10 @@
 package com.verindrarizya.movies.ui.detailmovie
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.verindrarizya.core.data.source.remote.network.ApiAssets.BASE_IMAGE_URL
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.utils.setGone
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_MOVIE = "extra_movie"
+        const val EXTRA_MOVIE_ID = "extra_movie_id"
     }
 
     private lateinit var binding: ActivityMovieDetailBinding
@@ -39,20 +38,13 @@ class MovieDetailActivity : AppCompatActivity() {
         initActionBar()
         binding.progressBar.setVisible()
 
-        val movieDetail = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
-        Log.d("MovieDetailTag", movieDetail.toString())
-        if (movieDetail != null) {
-            binding.progressBar.setGone()
-            binding.content.setVisible()
-            populateContentMovieDetail(movieDetail)
+        val movieId = intent.getIntExtra(EXTRA_MOVIE_ID, 0)
+        movieDetailViewModel.setMovieId(movieId)
 
-            setFabMovie(movieDetail.isFavorite)
-            binding.fabFavorite.setOnClickListener {
-                val newState = !movieDetail.isFavorite
-                movieDetailViewModel.setFavoriteMovie(movieDetail, newState)
-                setFabMovie(newState)
-            }
-        }
+        initProgressBarObserver()
+        initMovieObserver()
+        initFabStateObserver()
+        initFabOnClick()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -60,11 +52,39 @@ class MovieDetailActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    private fun initMovieObserver() {
+        movieDetailViewModel.movie.observe(this) {
+            populateContentMovieDetail(it)
+        }
+    }
+
+    private fun initFabStateObserver() {
+        movieDetailViewModel.isFavorite.observe(this) {
+            setFabMovie(it)
+        }
+    }
+
+    private fun initProgressBarObserver() {
+        movieDetailViewModel.isLoading.observe(this) { isLoading: Boolean ->
+            if(isLoading) {
+                binding.progressBar.setVisible()
+            } else {
+                binding.progressBar.setGone()
+                binding.content.setVisible()
+            }
+        }
+    }
+
+    private fun initFabOnClick() {
+        binding.fabFavorite.setOnClickListener { movieDetailViewModel.setFavoriteMovie() }
+    }
+
     private fun populateContentMovieDetail(data: Movie) {
         with(contentMovieDetailBinding) {
             Glide.with(this@MovieDetailActivity)
                 .load("$BASE_IMAGE_URL${data.poster}")
-                .apply(RequestOptions().override(120, 170))
+                .transition(withCrossFade())
+                .error(R.drawable.ic_connection_off_24)
                 .into(imgPoster)
 
             tvTitle.text = data.title

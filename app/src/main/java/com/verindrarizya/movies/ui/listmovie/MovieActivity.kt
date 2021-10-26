@@ -16,7 +16,7 @@ import com.verindrarizya.movies.ViewModelFactory
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
 import com.verindrarizya.movies.ui.adapter.MovieAdapter
 import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
-import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE
+import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE_ID
 import com.verindrarizya.movies.ui.setting.SettingActivity
 import javax.inject.Inject
 
@@ -80,9 +80,9 @@ class MovieActivity : AppCompatActivity() {
         val movieAdapter = MovieAdapter()
 
         movieAdapter.setData(data)
-        movieAdapter.onItemClick = {
+        movieAdapter.onItemClick = { movie: Movie ->
             val intent = Intent(this@MovieActivity, MovieDetailActivity::class.java)
-            intent.putExtra(EXTRA_MOVIE, it)
+            intent.putExtra(EXTRA_MOVIE_ID, movie.id)
             startActivity(intent)
         }
 

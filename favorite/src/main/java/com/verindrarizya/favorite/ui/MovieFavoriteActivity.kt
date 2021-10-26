@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.movies.ui.adapter.MovieAdapter
@@ -63,9 +62,9 @@ class MovieFavoriteActivity : AppCompatActivity() {
         val movieAdapter = MovieAdapter()
 
         movieAdapter.setData(data)
-        movieAdapter.onItemClick = {
+        movieAdapter.onItemClick = { movie: Movie ->
             val intent = Intent(this@MovieFavoriteActivity, MovieDetailActivity::class.java)
-            intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, it)
+            intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ID, movie.id)
             startActivity(intent)
         }
 

@@ -6,7 +6,6 @@ import com.verindrarizya.core.data.source.remote.network.ApiResponse
 import com.verindrarizya.core.data.source.remote.response.MovieResponse
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.domain.repository.IMovieRepository
-import com.verindrarizya.core.utils.AppExecutors
 import com.verindrarizya.core.utils.DataMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,8 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class MovieRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val localDataSource: LocalDataSource
 ): IMovieRepository {
 
     override fun getMovies(): Flow<Resource<List<Movie>>> {
@@ -41,13 +39,18 @@ class MovieRepository @Inject constructor(
         }.asFlow().flowOn(Dispatchers.Main)
     }
 
+    override fun getMovie(id: Int): Flow<Movie> =
+        localDataSource.getMovie(id).map {
+            DataMapper.mapEntityToDomain(it)
+        }
+
     override fun getFavoriteMovies(): Flow<List<Movie>> =
         localDataSource.getFavoriteMovies().map {
             DataMapper.mapEntitiesToDomain(it)
         }
 
-    override fun setFavoriteMovie(movie: Movie, state: Boolean) {
+    override suspend fun setFavoriteMovie(movie: Movie) {
         val movieEntity = DataMapper.mapDomainToEntity(movie)
-        appExecutors.diskIO().execute { localDataSource.setFavoriteMovie(movieEntity, state) }
+        localDataSource.setFavoriteMovie(movieEntity)
     }
 }

@@ -1,9 +1,6 @@
 package com.verindrarizya.core.data.source.local.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.verindrarizya.core.data.source.local.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -19,7 +16,7 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE is_favorite = 1")
     fun getFavoriteMovies(): Flow<List<MovieEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movies: List<MovieEntity>)
 
     @Update

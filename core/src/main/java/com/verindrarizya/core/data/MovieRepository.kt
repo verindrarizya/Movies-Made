@@ -27,8 +27,8 @@ class MovieRepository @Inject constructor(
                     DataMapper.mapEntitiesToDomain(it)
                 }
 
-            override fun shouldFetch(data: List<Movie>?): Boolean =
-                data == null || data.isEmpty()
+            override fun shouldFetch(data: List<Movie>?): Boolean = true
+                // data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> = remoteDataSource.getMovies()
 

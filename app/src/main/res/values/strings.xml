@@ -17,4 +17,6 @@
     <string name="key_notification_preference">notification_preference</string>
     <string name="notification_title">Notification</string>
     <string name="notification_summary">Allow notification each 2 days</string>
+    <string name="connection_is_off">Connection is off</string>
+    <string name="connection_is_off_content_description">Connection is off</string>
 </resources>

@@ -30,7 +30,10 @@ class MovieViewModel(private val movieUseCase: MovieUseCase): ViewModel() {
             movieUseCase.getMovies().collect { resource ->
 
                 when(resource) {
-                    is Resource.Loading -> _isLoading.value = true
+                    is Resource.Loading -> {
+                        _isError.value = false
+                        _isLoading.value = true
+                    }
 
                     is Resource.Succcess -> {
                         _isLoading.value = false

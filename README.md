@@ -37,6 +37,8 @@ A simple application applying clean architecture and modularization for fetching
 - [OkHttp](https://square.github.io/okhttp/), an HTTP & HTTP/2 client for Android and Java applications
 - [Gson](https://github.com/google/gson), a Java serialization/deserialization library to convert Java Objects into JSON and vice versa.
 - [Glide](https://bumptech.github.io/glide/), a fast and efficient image loading library for Android.
+- [Shimmer](https://github.com/facebook/shimmer-android), an Android library that provides an easy way to add a shimmer effect
+- [Lottie](https://lottiefiles.com/blog/working-with-lottie/getting-started-with-lottie-animations-in-android-app), is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile
 - Database encryption with [SQLCipher](https://github.com/sqlcipher/android-database-sqlcipher)
 - Obfuscation
 - Memory leak detection with [LeakCanary](https://square.github.io/leakcanary/)([See this branch](https://github.com/verindrarizya/Movies-Made/tree/with-leakcanary))

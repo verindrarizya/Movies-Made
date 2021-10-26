@@ -33,6 +33,10 @@ buildscript {
     ext.sqlcipher_version = "4.4.0"
     ext.sqlite_ktx_version = "2.1.0"
 
+    ext.lottie_version = "4.2.0"
+
+    ext.shimmer_version = "0.5.0"
+
     repositories {
         google()
         mavenCentral()

@@ -34,8 +34,10 @@ class MovieFavoriteActivity : AppCompatActivity() {
         binding = ActivityMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initActionBar()
+        // disabling swipe to refresh layout
+        binding.swipeRefreshLayout.isEnabled = false
 
+        initActionBar()
         initFavMoviesObserver()
     }
 
@@ -54,7 +56,7 @@ class MovieFavoriteActivity : AppCompatActivity() {
     private fun initFavMoviesObserver() {
         movieFavoriteViewModel.favoriteMovies.observe(this) {
             initAdapter(it)
-            if (it.isEmpty()) binding.tvEmptyData.setVisible() else binding.tvEmptyData.setGone()
+            if (it.isEmpty()) binding.viewEmptyContainer.setVisible() else binding.viewEmptyContainer.setGone()
         }
     }
 

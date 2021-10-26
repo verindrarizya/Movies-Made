@@ -21,8 +21,6 @@ import com.verindrarizya.movies.ui.setting.SettingActivity
 import javax.inject.Inject
 
 class MovieActivity : AppCompatActivity() {
-
-
     private lateinit var binding: ActivityMovieBinding
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
@@ -37,9 +35,17 @@ class MovieActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initActionBar()
+        initSwipeRefreshLayout()
         initMoviesObserver()
         initLoadingObserver()
         initErrorObserver()
+    }
+
+    private fun initSwipeRefreshLayout() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            movieViewModel.getMovies()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     /**
@@ -71,7 +77,7 @@ class MovieActivity : AppCompatActivity() {
             if(movies != null) {
                 initAdapter(movies)
             } else {
-                binding.tvEmptyData.setVisible()
+                binding.viewEmptyContainer.setVisible()
             }
         }
     }
@@ -106,9 +112,9 @@ class MovieActivity : AppCompatActivity() {
     private fun initErrorObserver() {
         movieViewModel.isError.observe(this) {
             if (it) {
-                binding.tvEmptyData.setVisible()
+                binding.viewErrorContainer.setVisible()
             } else {
-                binding.tvEmptyData.setGone()
+                binding.viewErrorContainer.setGone()
             }
         }
     }

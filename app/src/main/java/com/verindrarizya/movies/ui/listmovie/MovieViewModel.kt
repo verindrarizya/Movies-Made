@@ -41,6 +41,7 @@ class MovieViewModel(private val movieUseCase: MovieUseCase): ViewModel() {
                     }
 
                     is Resource.Error -> {
+                        _movies.value = null
                         _isLoading.value = false
                         _isError.value = true
                     }

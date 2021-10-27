@@ -37,6 +37,8 @@ buildscript {
 
     ext.shimmer_version = "0.5.0"
 
+    ext.mockito_version = "3.12.4"
+
     repositories {
         google()
         mavenCentral()

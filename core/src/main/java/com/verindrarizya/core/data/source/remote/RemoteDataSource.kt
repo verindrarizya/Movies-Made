@@ -29,7 +29,6 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService){
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
-                Log.e(TAG, e.toString() )
             }
         }.flowOn(Dispatchers.IO)
     }

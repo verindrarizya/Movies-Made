@@ -75,8 +75,10 @@ class MovieActivity : AppCompatActivity() {
     private fun initMoviesObserver() {
         movieViewModel.movies.observe(this) { movies ->
             if(movies != null) {
+                binding.rvMovies.setVisible()
                 initAdapter(movies)
             } else {
+                binding.rvMovies.setGone()
                 binding.viewEmptyContainer.setVisible()
             }
         }
@@ -102,8 +104,10 @@ class MovieActivity : AppCompatActivity() {
     private fun initLoadingObserver() {
         movieViewModel.isLoading.observe(this) {
             if (it) {
+                binding.rvMovies.setGone()
                 binding.progressBar.setVisible()
             } else {
+                binding.rvMovies.setVisible()
                 binding.progressBar.setGone()
             }
         }
@@ -112,6 +116,8 @@ class MovieActivity : AppCompatActivity() {
     private fun initErrorObserver() {
         movieViewModel.isError.observe(this) {
             if (it) {
+                binding.rvMovies.setGone()
+                binding.viewEmptyContainer.setGone()
                 binding.viewErrorContainer.setVisible()
             } else {
                 binding.viewErrorContainer.setGone()

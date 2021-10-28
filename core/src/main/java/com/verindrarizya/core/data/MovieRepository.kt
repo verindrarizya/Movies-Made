@@ -36,7 +36,7 @@ class MovieRepository @Inject constructor(
                 val movieList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertMovie(movieList)
             }
-        }.asFlow().flowOn(Dispatchers.Main)
+        }.asFlow()
     }
 
     override fun getMovie(id: Int): Flow<Movie> =

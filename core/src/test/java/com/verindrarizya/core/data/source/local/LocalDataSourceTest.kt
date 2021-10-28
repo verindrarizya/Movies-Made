@@ -2,6 +2,7 @@ package com.verindrarizya.core.data.source.local
 
 import com.verindrarizya.core.data.source.local.entity.MovieEntity
 import com.verindrarizya.core.data.source.local.room.MovieDao
+import com.verindrarizya.core.util.LocalDataDummy
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -18,48 +19,6 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LocalDataSourceTest {
 
-    private val listMovieEntity: MutableList<MovieEntity> = mutableListOf(
-        MovieEntity(
-            1,
-            "Movie1 title",
-            "Movie1 poster",
-            "Movie1 date",
-            9.00,
-            "Movie1 overview",
-            false
-        ),
-        MovieEntity(
-            2,
-            "Movie2 title",
-            "Movie2 poster",
-            "Movie2 date",
-            9.50,
-            "Movie2 overview",
-            false
-        ),
-        MovieEntity(
-            3,
-            "Movie3 title",
-            "Movie3 poster",
-            "Movie3 date",
-            8.00,
-            "Movie3 overview",
-            true
-        )
-    )
-
-    private val newMovieEntity = MovieEntity(
-        4,
-        "Movie4 title",
-        "Movie4 poster",
-        "Movie4 date",
-        8.50,
-        "Movie4 overview",
-        false
-    )
-
-    private val newMovies = listOf(newMovieEntity)
-
     @Mock
     private lateinit var movieDao: MovieDao
 
@@ -72,18 +31,19 @@ class LocalDataSourceTest {
 
     @Test
     fun getMovies(): Unit = runBlocking {
-        `when`(movieDao.getMovies()).thenReturn(flowOf(listMovieEntity))
+        `when`(movieDao.getMovies()).thenReturn(flowOf(LocalDataDummy.listMovieEntity))
 
         val result = localDataSource.getMovies().first()
         verify(movieDao).getMovies()
 
-        assertEquals(listMovieEntity, result)
+        assertEquals(LocalDataDummy.listMovieEntity, result)
     }
 
     @Test
     fun getMovie(): Unit = runBlocking {
         val movieId = 3
-        val movie: MovieEntity = listMovieEntity.find { it.id == movieId } ?: throw Exception("MovieEntity not found")
+        val movie: MovieEntity = LocalDataDummy.listMovieEntity
+                                    .find { it.id == movieId } ?: throw Exception("MovieEntity not found")
 
         `when`(movieDao.getMovie(movieId)).thenReturn(flowOf(movie))
 
@@ -95,7 +55,8 @@ class LocalDataSourceTest {
 
     @Test
     fun getFavoriteMovies(): Unit = runBlocking {
-        val favoriteList = listMovieEntity.filter { it.isFavorite == true }
+        val favoriteList = LocalDataDummy.listMovieEntity
+                                .filter { it.isFavorite == true }
 
         `when`(movieDao.getFavoriteMovies()).thenReturn(flowOf(favoriteList))
 
@@ -107,20 +68,20 @@ class LocalDataSourceTest {
 
     @Test
     fun insertMovie(): Unit = runBlocking {
-        `when`(movieDao.insertMovie(newMovies)).then {
-            newMovies.forEach { listMovieEntity.add(it) }
+        `when`(movieDao.insertMovie(LocalDataDummy.newMovies)).then {
+            LocalDataDummy.newMovies.forEach { LocalDataDummy.listMovieEntity.add(it) }
             true
         }
 
-        localDataSource.insertMovie(newMovies)
-        verify(movieDao).insertMovie(newMovies)
+        localDataSource.insertMovie(LocalDataDummy.newMovies)
+        verify(movieDao).insertMovie(LocalDataDummy.newMovies)
 
-        assertEquals(true, listMovieEntity.containsAll(newMovies))
+        assertEquals(true, LocalDataDummy.listMovieEntity.containsAll(LocalDataDummy.newMovies))
     }
 
     @Test
     fun setFavoriteMovie_shouldBeTrue(): Unit = runBlocking {
-        val movie = listMovieEntity[0]
+        val movie = LocalDataDummy.listMovieEntity[0]
 
         `when`(movieDao.updateFavoriteMovie(movie)).then {
             movie.isFavorite = true
@@ -136,7 +97,7 @@ class LocalDataSourceTest {
 
     @Test
     fun setFavoriteMovie_shouldBeFalse(): Unit = runBlocking {
-        val movie = listMovieEntity[0]
+        val movie = LocalDataDummy.listMovieEntity[0]
         movie.isFavorite = true
 
         `when`(movieDao.updateFavoriteMovie(movie)).then {

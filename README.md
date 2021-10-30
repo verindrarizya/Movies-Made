@@ -32,7 +32,7 @@ A simple application applying clean architecture and modularization for fetching
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), class for storing and manage UI-related data in a lifecycle conscious way.
 - [Room](https://developer.android.com/training/data-storage/room), a persistence library that provides an abstraction layer over SQLite.
 - [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager), an API that make it easy to schedule reliable, asynchronous tasks that are expected to run.
-- [Dagger2](https://dagger.dev/dev-guide/), a compile-time dependency injection that is fully static for Java and Android
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android),  a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project that's built on top of [Dagger](https://dagger.dev/)
 - [Retrofit](https://square.github.io/retrofit/), a type-safe HTTP client for Android and Java
 - [OkHttp](https://square.github.io/okhttp/), an HTTP & HTTP/2 client for Android and Java applications
 - [Gson](https://github.com/google/gson), a Java serialization/deserialization library to convert Java Objects into JSON and vice versa.

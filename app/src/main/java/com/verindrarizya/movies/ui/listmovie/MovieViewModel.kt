@@ -4,10 +4,13 @@ import androidx.lifecycle.*
 import com.verindrarizya.core.data.Resource
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.domain.usecase.MovieUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieViewModel(private val movieUseCase: MovieUseCase): ViewModel() {
+@HiltViewModel
+class MovieViewModel @Inject constructor(private val movieUseCase: MovieUseCase): ViewModel() {
 
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>>

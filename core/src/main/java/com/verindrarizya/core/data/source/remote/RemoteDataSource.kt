@@ -14,8 +14,6 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService){
 
-    companion object { private const val TAG = "RemoteDataSource"}
-
     suspend fun getMovies(): Flow<ApiResponse<List<MovieResponse>>> {
         return flow {
             try {

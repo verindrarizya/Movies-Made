@@ -14,7 +14,9 @@ import com.verindrarizya.favorite.di.DaggerFavoriteComponent
 import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
+import com.verindrarizya.movies.di.FavoriteModuleDependencies
 import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 class MovieFavoriteActivity : AppCompatActivity() {
@@ -27,9 +29,16 @@ class MovieFavoriteActivity : AppCompatActivity() {
     private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val coreComponent = (application as MyApplication).coreComponent
-        val favoriteComponent = DaggerFavoriteComponent.factory().create(coreComponent)
-        favoriteComponent.inject(this)
+        DaggerFavoriteComponent.builder()
+            .context(this)
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    applicationContext,
+                    FavoriteModuleDependencies::class.java
+                )
+            )
+            .build()
+            .inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)

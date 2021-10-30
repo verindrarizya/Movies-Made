@@ -10,26 +10,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.verindrarizya.core.domain.model.Movie
 import com.verindrarizya.core.utils.setGone
 import com.verindrarizya.core.utils.setVisible
-import com.verindrarizya.movies.MyApplication
 import com.verindrarizya.movies.R
-import com.verindrarizya.movies.ViewModelFactory
 import com.verindrarizya.movies.databinding.ActivityMovieBinding
 import com.verindrarizya.movies.ui.adapter.MovieAdapter
 import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity
 import com.verindrarizya.movies.ui.detailmovie.MovieDetailActivity.Companion.EXTRA_MOVIE_ID
 import com.verindrarizya.movies.ui.setting.SettingActivity
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieBinding
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory
-    private val movieViewModel: MovieViewModel by viewModels { viewModelFactory }
+    private val movieViewModel: MovieViewModel by viewModels()
 
     private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -1,16 +1,19 @@
 package com.verindrarizya.favorite.di
 
-import com.verindrarizya.core.di.CoreComponent
+import android.content.Context
+import com.verindrarizya.movies.di.FavoriteModuleDependencies
 import com.verindrarizya.favorite.ui.MovieFavoriteActivity
+import dagger.BindsInstance
 import dagger.Component
 
-@FavoriteScope
-@Component(dependencies = [CoreComponent::class], modules = [FavoriteModule::class])
+@Component(dependencies = [FavoriteModuleDependencies::class])
 interface FavoriteComponent {
 
-    @Component.Factory
-    interface Factory {
-        fun create(coreComponent: CoreComponent): FavoriteComponent
+    @Component.Builder
+    interface Builder {
+        fun context(@BindsInstance context: Context): Builder
+        fun appDependencies(favoriteModuleDependencies: FavoriteModuleDependencies): Builder
+        fun build(): FavoriteComponent
     }
 
     fun inject(movieFavoriteActivity: MovieFavoriteActivity)

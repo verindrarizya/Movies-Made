@@ -2,16 +2,14 @@ package com.verindrarizya.movies.di
 
 import com.verindrarizya.core.domain.usecase.MovieInteractor
 import com.verindrarizya.core.domain.usecase.MovieUseCase
-import dagger.Binds
-import dagger.Module
+import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-@Module
+@EntryPoint
 @InstallIn(SingletonComponent::class)
-abstract class AppModule {
+interface FavoriteModuleDependencies {
 
-    @Binds
-    abstract fun bindAppMovieUseCase(movieInteractor: MovieInteractor): MovieUseCase
+    fun movieInteractor(): MovieUseCase
 
 }
